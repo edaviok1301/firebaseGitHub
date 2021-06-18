@@ -19,7 +19,6 @@ import android.content.ContentResolver;
 import android.graphics.Color;
 import android.media.AudioAttributes;
 import me.leolin.shortcutbadger.ShortcutBadger;
-import amazonia.iu.com.amlibrary.client.IUApp;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -49,12 +48,7 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
       name, "string", this.getPackageName()));
   }
 
-  public void onNewToken(String s) {
-    super.onNewToken(s);
-    // BEGIN: Add code to refresh IU Token.
-    IUApp.refreshFCMToken(this);
-    // END
-  }
+
   /**
    * Called when message is received.
    *
@@ -62,13 +56,6 @@ public class FirebasePluginMessagingService extends FirebaseMessagingService {
    */
   @Override
   public void onMessageReceived(RemoteMessage remoteMessage) {
-
-     // BEGIN: Enable IU to handle messages targeted for IU
-     // Add the below line on 1st line of the method.
-     if (IUApp.handleFCMMessage(this, remoteMessage)) {
-      return;
-      }
-     // END
 
     // [START_EXCLUDE]
     // There are two types of messages data messages and notification messages. Data messages are handled
